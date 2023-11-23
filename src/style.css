@@ -1,6 +1,6 @@
 :root {
     --blanco: #fff;
-    --primario: #61ecbc;
+    --primario: #53c59d;
     --negro: #182339;
 }
 html {
@@ -62,13 +62,14 @@ body {
 }
 .formulario [type="submit"] {
     background-color: var(--primario);
-    color: var(--negro);
+    color: #ecebeb;
     border: none;
     padding: 1rem;
     font-weight: 900;
     text-transform: uppercase;
     cursor: pointer;
     transition: background-color 300ms ease;
+    border-radius: 5px;
     margin-top: 2rem;
 }
 .formulario [type="submit"]:hover {
