@@ -9,11 +9,13 @@
       { codigo: 'GBP', texto: 'Libra Esterlina'},
   ])
 
+  const criptomonedas = ref([]) 
+
   onMounted(() => {
     fetch('https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD')
       .then(respuesta => respuesta.json())
-      .then(data => {
-        console.log(data);
+      .then(({Data}) => {
+        criptomonedas.value = Data
       })
   })
 
