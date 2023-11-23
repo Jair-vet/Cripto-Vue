@@ -1,6 +1,7 @@
 <script setup>
   import { ref, onMounted, reactive, computed } from 'vue';
   import Alerta from './components/Alerta.vue'
+  import Spinner from './components/Spinner.vue'
   
   const monedas = ref([
     { codigo: 'USD', texto: 'Dolar de Estados Unidos'},
@@ -18,7 +19,7 @@
   })
 
   const cotizacion = ref({})
-
+  const cargando = ref(false)
 
   onMounted(() => {
     fetch('https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD')
@@ -42,6 +43,8 @@
   }
 
   const obtenerCotizacion = async () => {
+    cargando.value = true
+    cotizacion.value = {}
     const { moneda, criptomoneda } = cotizar
     const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`
     
@@ -51,6 +54,8 @@
     // Asignar al State
     cotizacion.value = data.DISPLAY[criptomoneda][moneda]
 
+    // Retirar Spinner
+    cargando.value = false
   }
 
   const mostrarResultado = computed(() => {
@@ -107,6 +112,10 @@
         <input type="submit" value="Cotizar"/>
       </form>
 
+      <Spinner 
+        v-if="cargando"
+      />
+
       <div v-if="mostrarResultado" class="contenedor-resultado">
         <h2>Cotización</h2>
         <div class="resultado">
@@ -119,7 +128,7 @@
             <p>El precio mas alto del día: <span>{{ cotizacion.HIGHDAY }}</span></p>
             <p>El precio más bajo del día: <span>{{ cotizacion.LOWDAY }}</span></p>
             <p>Variación ultimas 24 horas: <span>{{ cotizacion. CHANGEPCT24HOUR }}%</span></p>
-            <!-- <p>Ultima Actualización: <span>{{ cotizacion. }}</span></p> -->
+            <p>Ultima Actualización: <span>{{ cotizacion.LASTUPDATE }}</span></p>
           </div>
         </div>
 
