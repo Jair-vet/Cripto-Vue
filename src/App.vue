@@ -1,15 +1,17 @@
 <script setup>
   import { ref, onMounted, reactive } from 'vue';
-
-
+  import Alerta from './components/Alerta.vue'
+  
   const monedas = ref([
-      { codigo: 'USD', texto: 'Dolar de Estados Unidos'},
-      { codigo: 'MXN', texto: 'Peso Mexicano'},
-      { codigo: 'EUR', texto: 'Euro'},
-      { codigo: 'GBP', texto: 'Libra Esterlina'},
+    { codigo: 'USD', texto: 'Dolar de Estados Unidos'},
+    { codigo: 'MXN', texto: 'Peso Mexicano'},
+    { codigo: 'EUR', texto: 'Euro'},
+    { codigo: 'GBP', texto: 'Libra Esterlina'},
   ])
-
+  
   const criptomonedas = ref([]) 
+  const error = ref('')
+
   const cotizar = reactive({
     moneda: '',
     criptomoneda: ''
@@ -23,6 +25,26 @@
       })
   })
 
+  const cotizarCripto = () => {
+    // Validar que cotizar este lleno
+    if(Object.values(cotizar).includes('')){
+      error.value = 'Todos los Campos son Obligatorios'
+      return
+    }
+    setTimeout(() => {
+      error.value = ''
+    }, 3000)
+
+    obtenerCotizacion()
+  }
+
+  const obtenerCotizacion = async () => {
+    const { moneda, criptomoneda } = cotizar
+    const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`
+    
+    
+  }
+
 </script>
 
 <template>
@@ -30,7 +52,14 @@
     <h1 class="titulo">Cotizador de <span>Criptomonedas</span></h1>
 
     <div class="contenido">
-      <form class="formulario">
+      <form 
+        class="formulario"
+        @submit.prevent="cotizarCripto"
+      >
+        <Alerta 
+            v-if="error"
+        >{{ error }}</Alerta>
+
         <div class="campo">
           <label for="moneda">Moneda:</label>
           <select 
