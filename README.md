@@ -1,7 +1,5 @@
-# Vue 3 + Vite
+# Cripto -App
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+### https://655fe3b7548d224fef48f8d1--startling-tiramisu-3861af.netlify.app
 
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+![Cripto-Moneda-VUE](https://github.com/Jair-vet/Cripto-Vue/assets/63264620/1d5094b2-cfdb-42fb-83d3-c671b856e9d7)
